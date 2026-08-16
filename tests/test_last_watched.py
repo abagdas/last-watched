@@ -15,8 +15,7 @@ from last_watched.scanner import find_most_recent_videos
 
 class LastWatchedTests(unittest.TestCase):
     def setUp(self) -> None:
-        # Test ortamı sistem geçici klasörüne yazmayı kısıtlayabilir; çalışma
-        # alanı ise test süresince temizlenebilen güvenilir bir konumdur.
+
         self.temporary_directory = tempfile.TemporaryDirectory(
             dir=Path(__file__).resolve().parents[1]
         )
@@ -62,9 +61,9 @@ class LastWatchedTests(unittest.TestCase):
         self.assertIn(second_video.name, stdout)
         self.assertIn(str(first_video), stdout)
         self.assertIn(str(second_video), stdout)
-        self.assertIn("Son erişim zamanı eşit olan 2 video bulundu.", stdout)
-        self.assertIn("kesin son bölüm belirlenemiyor", stdout)
-        self.assertRegex(stdout, r"Erişim zamanı: \d{4}-\d{2}-\d{2}T")
+        self.assertIn("Son erişim zamani esit olan 2 video bulundu.", stdout)
+        self.assertIn("kesin son bolum belirlenemiyor", stdout)
+        self.assertRegex(stdout, r"Erişim zamani: \d{4}-\d{2}-\d{2}T")
         self.assertEqual(2, stdout.count("Dosya: "))
 
     def test_recurses_and_ignores_non_video_files(self) -> None:
@@ -83,13 +82,13 @@ class LastWatchedTests(unittest.TestCase):
         invalid_code, invalid_stdout, invalid_stderr = self._run_main(str(missing))
         self.assertEqual(2, invalid_code)
         self.assertEqual("", invalid_stdout)
-        self.assertIn("Klasör bulunamadı", invalid_stderr)
+        self.assertIn("Klasör bulunamadi", invalid_stderr)
 
         (self.root / "notes.txt").write_text("not a video", encoding="utf-8")
         empty_code, empty_stdout, empty_stderr = self._run_main(str(self.root))
         self.assertEqual(1, empty_code)
         self.assertEqual("", empty_stdout)
-        self.assertIn("video dosyası bulunamadı", empty_stderr)
+        self.assertIn("video dosyasi bulunamadi", empty_stderr)
 
     def test_module_help_and_example_root_and_shows_paths_work(self) -> None:
         media_root = self.root / "P_S_M"
@@ -121,7 +120,7 @@ class LastWatchedTests(unittest.TestCase):
         )
 
         self.assertEqual(0, help_result.returncode)
-        self.assertIn("Taranacak kök klasör yolu", help_result.stdout)
+        self.assertIn("Taranacak kok klasor yolu", help_result.stdout)
         self.assertEqual(0, root_result.returncode)
         self.assertIn(str(episode), root_result.stdout)
         self.assertNotIn(str(movie), root_result.stdout)

@@ -1,5 +1,3 @@
-"""``python -m last_watched`` komutunun giriş noktası."""
-
 from __future__ import annotations
 
 import argparse
@@ -15,14 +13,14 @@ from .scanner import VideoFile, find_most_recent_videos
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m last_watched",
-        description="Bir klasör ağacındaki en son erişilen video dosyalarını gösterir.",
+        description="Bir klasor agacindaki en son erisilen video dosyalarini gösterir.",
     )
-    parser.add_argument("klasor", help="Taranacak kök klasör yolu")
+    parser.add_argument("klasor", help="Taranacak kok klasör yolu")
     return parser
 
 
 def _write_warning(path: Path, error: OSError) -> None:
-    print(f"Uyarı: Erişilemeyen öğe atlandı: {path} ({error})", file=sys.stderr)
+    print(f"Uyari: Erisilemeyen oge atlandi: {path} ({error})", file=sys.stderr)
 
 
 def _format_access_time(video: VideoFile) -> str:
@@ -31,20 +29,19 @@ def _format_access_time(video: VideoFile) -> str:
 
 
 def _write_results(root: Path, videos: list[VideoFile]) -> None:
-    """Sonuçları uzun dosya yolları için okunaklı, çok satırlı yazdırır."""
 
     multiple_videos = len(videos) > 1
     if multiple_videos:
-        print(f"Son erişim zamanı eşit olan {len(videos)} video bulundu.")
+        print(f"Son erisim zamani esit olan {len(videos)} video bulundu.")
         print(
-            "Not: Windows bu dosyaların LastAccessTime değerlerini aynı anda "
-            "kaydettiği için kesin son bölüm belirlenemiyor."
+            "Not: Windows bu dosyalarin LastAccessTime degerlerini ayni anda "
+            "kaydettigi için kesin son bolum belirlenemiyor."
         )
     else:
-        print("Son erişilen video")
+        print("Son erisilen video")
 
-    print(f"Erişim zamanı: {_format_access_time(videos[0])}")
-    print(f"Taranan klasör: {root}")
+    print(f"Erisim zamani: {_format_access_time(videos[0])}")
+    print(f"Taranan klasor: {root}")
 
     for number, video in enumerate(videos, start=1):
         if multiple_videos:
@@ -57,24 +54,22 @@ def _validated_root(raw_path: str) -> Path:
     root = Path(raw_path).expanduser()
     try:
         if not root.exists():
-            raise ValueError("Klasör bulunamadı")
+            raise ValueError("Klasor bulunamadi")
         if not root.is_dir():
-            raise ValueError("Verilen yol bir klasör değil")
+            raise ValueError("Verilen yol bir klasor degil")
 
         root = root.resolve()
-        # Kök yolunun gerçekten listelenebildiğini kontrol eder; dosya içeriği
-        # okunmadığından erişim zamanları değişmez.
+
         with os.scandir(root):
             pass
     except PermissionError as error:
-        raise ValueError("Klasöre erişilemiyor") from error
+        raise ValueError("Klasore erisilemiyor") from error
     except OSError as error:
-        raise ValueError(f"Klasöre erişilemiyor: {error}") from error
+        raise ValueError(f"Klasore erisilemiyor: {error}") from error
     return root
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Komut satırı programını çalıştırır ve çıkış kodunu döndürür."""
 
     args = _parser().parse_args(argv)
     try:
@@ -86,11 +81,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         videos = find_most_recent_videos(root, warn=_write_warning)
     except OSError as error:
-        print(f"Hata: Klasör taranamadı: {root} ({error})", file=sys.stderr)
+        print(f"Hata: Klasor taranamadi: {root} ({error})", file=sys.stderr)
         return 2
 
     if not videos:
-        print(f"Hata: Bu klasör ağacında video dosyası bulunamadı: {root}", file=sys.stderr)
+        print(f"Hata: Bu klasor agacinda video dosyasi bulunamadi: {root}", file=sys.stderr)
         return 1
 
     _write_results(root, videos)

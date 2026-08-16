@@ -15,14 +15,14 @@ Araç bağımlılık gerektirmez. Kurulumdan sonra herhangi bir klasörden
 çalıştırılabilir:
 
 ```powershell
-last-watched "C:\Users\ahmet\Desktop\P_S_M"
-last-watched "C:\Users\ahmet\Desktop\P_S_M\Shows"
+last-watched "C:\Users\<username>\Desktop\P_S_M"
+last-watched "C:\Users\<username>\Desktop\P_S_M\Shows"
 ```
 
 Kurulum yapmadan, depo klasöründeyken de şu şekilde çalışır:
 
 ```powershell
-python -m last_watched "C:\Users\ahmet\Desktop\P_S_M"
+python -m last_watched "C:\Users\<username>\Desktop\P_S_M"
 ```
 
 ## Davranış

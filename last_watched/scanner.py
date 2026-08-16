@@ -1,5 +1,3 @@
-"""Video dosyalarını erişim zamanına göre tarama işlevleri."""
-
 from __future__ import annotations
 
 import os
@@ -13,7 +11,6 @@ VIDEO_EXTENSIONS = frozenset({".mkv", ".mp4", ".avi", ".mov", ".m4v", ".wmv", ".
 
 @dataclass(frozen=True)
 class VideoFile:
-    """Taranan bir video ve değişmeden okunan erişim zamanı."""
 
     path: Path
     access_time_ns: int
@@ -25,12 +22,6 @@ WarningHandler = Callable[[Path, OSError], None]
 def find_most_recent_videos(
     root: Path, warn: WarningHandler | None = None
 ) -> list[VideoFile]:
-    """``root`` altındaki en son erişilmiş video dosyalarını döndürür.
-
-    Dosya içeriği açılmaz; erişim zamanı yalnızca ``DirEntry.stat`` metadatasından
-    okunur. Erişilemeyen alt öğeler uyarı verilerek atlanır. Kök klasöre
-    erişilemiyorsa ilgili ``OSError`` çağırana iletilir.
-    """
 
     newest_access_time: int | None = None
     newest_videos: list[VideoFile] = []

@@ -13,9 +13,9 @@ from .scanner import VideoFile, find_most_recent_videos
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m last_watched",
-        description="Bir klasor agacindaki en son erisilen video dosyalarini gösterir.",
+        description="Bir klasor agacindaki en son erisilen video dosyalarini gosterir.",
     )
-    parser.add_argument("klasor", help="Taranacak kok klasör yolu")
+    parser.add_argument("klasor", help="Taranacak kok klasor yolu")
     return parser
 
 
@@ -35,7 +35,7 @@ def _write_results(root: Path, videos: list[VideoFile]) -> None:
         print(f"Son erisim zamani esit olan {len(videos)} video bulundu.")
         print(
             "Not: Windows bu dosyalarin LastAccessTime degerlerini ayni anda "
-            "kaydettigi için kesin son bolum belirlenemiyor."
+            "kaydettigi icin kesin son bolum belirlenemiyor."
         )
     else:
         print("Son erisilen video")

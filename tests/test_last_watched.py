@@ -61,9 +61,9 @@ class LastWatchedTests(unittest.TestCase):
         self.assertIn(second_video.name, stdout)
         self.assertIn(str(first_video), stdout)
         self.assertIn(str(second_video), stdout)
-        self.assertIn("Son erişim zamani esit olan 2 video bulundu.", stdout)
+        self.assertIn("Son erisim zamani esit olan 2 video bulundu.", stdout)
         self.assertIn("kesin son bolum belirlenemiyor", stdout)
-        self.assertRegex(stdout, r"Erişim zamani: \d{4}-\d{2}-\d{2}T")
+        self.assertRegex(stdout, r"Erisim zamani: \d{4}-\d{2}-\d{2}T")
         self.assertEqual(2, stdout.count("Dosya: "))
 
     def test_recurses_and_ignores_non_video_files(self) -> None:
@@ -82,7 +82,7 @@ class LastWatchedTests(unittest.TestCase):
         invalid_code, invalid_stdout, invalid_stderr = self._run_main(str(missing))
         self.assertEqual(2, invalid_code)
         self.assertEqual("", invalid_stdout)
-        self.assertIn("Klasör bulunamadi", invalid_stderr)
+        self.assertIn("Klasor bulunamadi", invalid_stderr)
 
         (self.root / "notes.txt").write_text("not a video", encoding="utf-8")
         empty_code, empty_stdout, empty_stderr = self._run_main(str(self.root))

@@ -1,42 +1,42 @@
 # last_watched
 
-Windows'ta bir klasör ağacındaki video dosyalarını tarar ve en güncel
-`LastAccessTime` değerine sahip dosya ya da dosyaları gösterir.
+Windows'ta bir klasor agacindaki video dosyalarini tarar ve en guncel
+`LastAccessTime` degerine sahip dosya ya da dosyalari gosterir.
 
 ## Kurulum
 
-Bu depo içindeyken:
+Bu depo icindeyken:
 
 ```powershell
 python -m pip install -e .
 ```
 
-Araç bağımlılık gerektirmez. Kurulumdan sonra herhangi bir klasörden
-çalıştırılabilir:
+Arac bagimlilik gerektirmez. Kurulumdan sonra herhangi bir klasorden
+calistirilabilir:
 
 ```powershell
 last-watched "C:\Users\<username>\Desktop\P_S_M"
 last-watched "C:\Users\<username>\Desktop\P_S_M\Shows"
 ```
 
-Kurulum yapmadan, depo klasöründeyken de şu şekilde çalışır:
+Kurulum yapmadan, depo klasorundeyken de su sekilde calisir:
 
 ```powershell
 python -m last_watched "C:\Users\<username>\Desktop\P_S_M"
 ```
 
-## Davranış
+## Davranis
 
-- `.mkv`, `.mp4`, `.avi`, `.mov`, `.m4v`, `.wmv` ve `.webm` dosyalarını
-  özyinelemeli olarak tarar.
-- Altyazı, afiş ve diğer video olmayan dosyaları yok sayar.
-- Dosya içeriğini açmadan yalnızca metadata okur; bu nedenle tarama erişim
-  zamanını değiştirmez.
-- Birden çok dosyanın erişim zamanı tamamen eşitse hepsini listeler. Windows
-  `LastAccessTime` bilgisini gecikmeli veya toplu güncelleyebildiğinden gerçek
-  izleme sırası bu durumda kesin olarak belirlenemez.
-- Erişilemeyen alt klasörleri uyarıyla atlar; geçersiz klasörler ve videosuz
-  klasörler için Türkçe hata ve başarısız çıkış kodu verir.
+- `.mkv`, `.mp4`, `.avi`, `.mov`, `.m4v`, `.wmv` ve `.webm` dosyalarini
+  ozyinelemeli olarak tarar.
+- Altyazi, afis ve diger video olmayan dosyalari yok sayar.
+- Dosya icerigini acmadan yalnizca metadata okur; bu nedenle tarama erisim
+  zamanini degistirmez.
+- Birden cok dosyanin erisim zamani tamamen esitse hepsini listeler. Windows
+  `LastAccessTime` bilgisini gecikmeli veya toplu guncelleyebildiginden gercek
+  izleme sirasi bu durumda kesin olarak belirlenemez.
+- Erisilemeyen alt klasorleri uyariyla atlar; gecersiz klasorler ve videosuz
+  klasorler icin Turkce hata ve basarisiz cikis kodu verir.
 
 ## Testler
 

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "last-watched"
+version = "0.1.0"
+description = "En son erişilen video dosyalarını bulan bağımsız Windows CLI aracı"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Ahmet Bahadır Ağdaş" }]
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Utilities",
+]
+
+[project.scripts]
+last-watched = "last_watched.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["last_watched*"]
